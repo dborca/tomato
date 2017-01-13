@@ -228,7 +228,7 @@ thread_timer_remain_second (struct thread *thread)
   struct timeval timer_now;
   struct tm *tm;
   time_t remain_time;
-  char buf[25];
+  static char buf[25];
   int len = 25;
 
   gettimeofday (&timer_now, NULL);
