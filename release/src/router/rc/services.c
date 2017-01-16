@@ -400,6 +400,14 @@ void start_dnsmasq()
 #if defined(TCONFIG_PPTPD) || defined(TCONFIG_IPSEC_TOOLS)
 	write_xxtpd_dnsmasq_config(f);
 #endif
+#ifdef TCONFIG_IPSEC_TOOLS
+	if (nvram_match("ipsec_enable", "1")) {
+		// ok, this IS dangerous: make sure we drop all non-ipsec domain requests from wanface in firewall.c
+		const char *wanface = nvram_safe_get("wan_iface");
+		fprintf(f, "interface=%s\n", wanface);
+		fprintf(f, "no-dhcp-interface=%s\n", wanface);
+	}
+#endif
 
 #ifdef TCONFIG_IPV6
 	if (ipv6_enabled()) {
@@ -2278,6 +2286,7 @@ void start_services(void)
 #endif
 #ifdef TCONFIG_IPSEC_TOOLS
 	start_l2tpd();
+	start_ipsec();
 #endif
 	restart_nas_services(1, 1);	// !!TB - Samba, FTP and Media Server
 
@@ -2335,6 +2344,7 @@ void stop_services(void)
 #endif
 #ifdef TCONFIG_IPSEC_TOOLS
 	stop_l2tpd();
+	stop_ipsec();
 #endif
 	stop_sched();
 	stop_rstats();
@@ -2968,6 +2978,15 @@ TOP:
 	if (strcmp(service, "l2tpd") == 0) {
 		if (action & A_STOP) stop_l2tpd();
 		if (action & A_START) start_l2tpd();
+		goto CLEAR;
+	}
+	if (strcmp(service, "ipsec") == 0) {
+		if (action & A_STOP) stop_ipsec();
+		if (action & A_START) {
+			ipsec_passwd();
+			create_passwd();
+			start_ipsec();
+		}
 		goto CLEAR;
 	}
 #endif
