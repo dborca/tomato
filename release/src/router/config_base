@@ -41,6 +41,7 @@ TCONFIG_SAMBASRV=y
 # TCONFIG_NANO is not set
 # TCONFIG_DNSCRYPT is not set
 # TCONFIG_TOR is not set
+# TCONFIG_IPSEC_TOOLS is not set
 # TCONFIG_CTF is not set
 # TCONFIG_DNSSEC is not set
 # TCONFIG_TINC is not set
