@@ -25,7 +25,6 @@ case $host in
 	LDFLAGS="-Wl,-R/usr/pkg/lib $LDFLAGS"
 	;;
 *linux*)
-	LIBS="$LIBS -lresolv"
 	INSTALL_OPTS="-o bin -g bin"
 	INCLUDE_GLIBC="include-glibc"
 	RPM="rpm"
