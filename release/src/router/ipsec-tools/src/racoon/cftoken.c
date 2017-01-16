@@ -332,6 +332,9 @@ void yyfree (void *  );
 
 /* Begin user sect3 */
 
+#define yywrap() 1
+#define YY_SKIP_YYWRAP
+
 typedef unsigned char YY_CHAR;
 
 FILE *yyin = (FILE *) 0, *yyout = (FILE *) 0;
@@ -1661,7 +1664,7 @@ static int yy_first_time = 1;
 
 
 
-#line 1665 "cftoken.c"
+#line 1668 "cftoken.c"
 
 #define INITIAL 0
 #define S_INI 1
@@ -1872,7 +1875,7 @@ YY_DECL
 
 
 	/* privsep */
-#line 1876 "cftoken.c"
+#line 1879 "cftoken.c"
 
 	if ( !(yy_init) )
 		{
@@ -3706,7 +3709,7 @@ YY_RULE_SETUP
 #line 675 "cftoken.l"
 ECHO;
 	YY_BREAK
-#line 3710 "cftoken.c"
+#line 3713 "cftoken.c"
 
 	case YY_END_OF_BUFFER:
 		{

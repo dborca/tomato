@@ -110,7 +110,7 @@ name		{letter}(({letter}|{digit}|{hyphen})*({letter}|{digit}))*
 hostname	{name}(({dot}{name})+{dot}?)?
 
 %s S_PL S_AUTHALG S_ENCALG
-
+%option noyywrap
 %option noinput nounput
 %%
 

@@ -332,6 +332,9 @@ void yyfree (void *  );
 
 /* Begin user sect3 */
 
+#define yywrap() 1
+#define YY_SKIP_YYWRAP
+
 typedef unsigned char YY_CHAR;
 
 FILE *yyin = (FILE *) 0, *yyout = (FILE *) 0;
@@ -1079,7 +1082,7 @@ char *yytext;
 /* common section */
 
 #define YY_NO_INPUT 1
-#line 1083 "token.c"
+#line 1086 "token.c"
 
 #define INITIAL 0
 #define S_PL 1
@@ -1266,7 +1269,7 @@ YY_DECL
 
 
 
-#line 1270 "token.c"
+#line 1273 "token.c"
 
 	if ( !(yy_init) )
 		{
@@ -1899,7 +1902,7 @@ YY_RULE_SETUP
 #line 314 "token.l"
 ECHO;
 	YY_BREAK
-#line 1903 "token.c"
+#line 1906 "token.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(S_PL):
 case YY_STATE_EOF(S_AUTHALG):
