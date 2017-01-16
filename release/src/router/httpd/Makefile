@@ -29,6 +29,11 @@ ifeq ($(TCONFIG_PPTPD),y)
 OBJS += pptpd.o
 endif
 
+ifeq ($(TCONFIG_IPSEC_TOOLS),y)
+OBJS += l2tpd.o ipsec.o
+CFLAGS += -I$(TOP)/openssl/include
+endif
+
 all: httpd
 
 httpd: $(OBJS)

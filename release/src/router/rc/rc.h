@@ -475,11 +475,25 @@ extern void start_ups();
 extern void stop_ups();
 #endif
 
+#if defined(TCONFIG_PPTPD) || defined(TCONFIG_IPSEC_TOOLS)
+extern void get_broadcast(char *ipaddr, char *netmask);
+extern void write_chap_secret(const char *users, const char *server, char *file);
+extern void write_xxtpd_dnsmasq_config(FILE* f);
+#endif
+
 // pptp.c
 #ifdef TCONFIG_PPTPD
 extern void start_pptpd(void);
 extern void stop_pptpd(void);
-extern void write_pptpd_dnsmasq_config(FILE* f);
+#endif
+
+// l2tp.c
+#ifdef TCONFIG_IPSEC_TOOLS
+extern void start_l2tpd(void);
+extern void stop_l2tpd(void);
+extern void start_ipsec(void);
+extern void stop_ipsec(void);
+extern int ipsec_passwd(void);
 #endif
 
 // vpn.c

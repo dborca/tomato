@@ -1270,6 +1270,25 @@ static void filter_forward(void)
 	}
 #endif
 
+#ifdef TCONFIG_IPSEC_TOOLS
+	//Add for ipsec server.  XXX this belongs to filter_input, not filter_forward
+	if (nvram_match("l2tpd_enable", "1") || nvram_match("ipsec_enable", "1")) {
+		modprobe("xt_policy");
+		if (nvram_match("l2tpd_enable", "1")) {
+			ipt_write("-A INPUT -p udp -m policy --dir in --pol ipsec -m udp --dport 1701 -j ACCEPT\n");
+		} else {
+			ipt_write("-A INPUT -m policy --dir in --pol ipsec -j ACCEPT\n");
+			//ipt_write("-A INPUT -i %s -p udp -m udp --dport 53 -j DROP\n", wanfaces.iface[0].name); // see services.c#start_dnsmasq()
+		}
+		ipt_write("-A INPUT -p udp --dport 4500 -j ACCEPT\n");
+		ipt_write("-A INPUT -p udp --dport 500 -j ACCEPT\n");
+		ipt_write("-A INPUT -p esp -j ACCEPT\n");
+		if (nvram_match("l2tpd_enable", "1")) {
+			ipt_write("-A INPUT -p ah -j ACCEPT\n");
+		}
+	}
+#endif
+
 #ifdef TCONFIG_IPV6
 	// Filter out invalid WAN->WAN connections
 	if (*wan6face)

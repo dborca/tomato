@@ -877,7 +877,7 @@ struct iprange *set_range (char *word, char *value, struct iprange *in)
 		}
 		if (count < 3) {
 			strcpy(ip_hi, value);
-			for (e = ip_hi + sizeof(ip_hi); e >= ip_hi; e--) {
+			for (e = ip_hi + strlen(ip_hi); e >= ip_hi; e--) {
 				if (*e == '.') count--;
 				if (count < 0) {
 					e++;
@@ -1132,6 +1132,7 @@ int set_ipsec_saref (char *word, char *value, int context, void *item)
 	    }
 	    if(g->forceuserspace != 1) {
 		    l2tp_log(LOG_WARNING, "IPsec SAref does not work with L2TP kernel mode yet, enabling forceuserspace=yes\n");
+		    g->forceuserspace = 1;
 	    }
 	    break;
     default:

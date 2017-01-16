@@ -288,6 +288,12 @@ sub fixDyn
 	fixDynDep("nas", "libc.so.0");
 	fixDynDep("wl", "libc.so.0");
 
+	fixDynDep("racoon", "libipsec.so.0.0.1");
+#	fixDynDep("setkey", "libipsec.so.0.0.1");
+#	fixDynDep("racoonctl", "libipsec.so.0.0.1");
+#	fixDynDep("racoonctl", "libracoon.so.0.0.0");
+#	fixDynDep("libracoon.so.0.0.0", "libipsec.so.0.0.1");
+
 #Roadkill for NocatSplash
 	fixDynDep("splashd","libglib-1.2.so.0.0.10");
 }
@@ -558,6 +564,9 @@ genSO("${root}/lib/libutil.so.0", "${uclibc}/lib/libutil.a", "${stripshared}");
 
 genSO("${root}/usr/lib/libcrypto.so.1.0.0", "${router}/openssl/libcrypto.a");
 genSO("${root}/usr/lib/libssl.so.1.0.0", "${router}/openssl/libssl.a", "${stripshared}", "-L${router}/openssl");
+
+genSO("${root}/usr/lib/libipsec.so.0.0.1", "${router}/ipsec-tools/src/libipsec/.libs/libipsec.a", "", "-L${router}/openssl");
+#genSO("${root}/usr/lib/libracoon.so.0.0.0", "${router}/ipsec-tools/src/racoon/.libs/libracoon.a", "", "-L${router}/openssl -L${router}/ipsec-tools/src/libipsec/.libs");
 
 genSO("${root}/usr/lib/libzebra.so", "${router}/zebra/lib/libzebra.a");
 genSO("${root}/usr/lib/libz.so.1", "${router}/zlib/libz.a");

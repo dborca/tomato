@@ -101,6 +101,15 @@ extern void asp_pptpd_userol(int argc, char **argv);
 extern void wo_pptpdcmd(char *url);
 #endif
 
+//l2tpd.c
+#ifdef TCONFIG_IPSEC_TOOLS
+extern void asp_l2tpd_userol(int argc, char **argv);
+extern void wo_l2tpdcmd(char *url);
+extern void asp_ipsec_userol(int argc, char **argv);
+extern void asp_ipsec_altnames(int argc, char **argv);
+extern void wo_ipseccmd(char *url);
+#endif
+
 // devlist.c
 extern void asp_arplist(int argc, char **argv);
 extern void asp_devlist(int argc, char **argv);
