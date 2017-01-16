@@ -2525,6 +2525,10 @@ REMOVE-END */
 			['OpenVPN Server',		'server.asp'],
 			['OpenVPN Client',		'client.asp'],
 /* OPENVPN-END */
+/* IPSEC_TOOLS-BEGIN */
+			['L2TP Server',			'l2tp-server.asp'],
+			['L2TP Online',			'l2tp-online.asp'],
+/* IPSEC_TOOLS-END */
 /* PPTPD-BEGIN */
 			['PPTP Server',			'pptp-server.asp'],
 			['PPTP Online',			'pptp-online.asp'],

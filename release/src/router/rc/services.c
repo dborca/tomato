@@ -397,8 +397,8 @@ void start_dnsmasq()
 	write_vpn_dnsmasq_config(f);
 #endif
 
-#ifdef TCONFIG_PPTPD
-	write_pptpd_dnsmasq_config(f);
+#if defined(TCONFIG_PPTPD) || defined(TCONFIG_IPSEC_TOOLS)
+	write_xxtpd_dnsmasq_config(f);
 #endif
 
 #ifdef TCONFIG_IPV6
@@ -2276,6 +2276,9 @@ void start_services(void)
 #ifdef TCONFIG_PPTPD
 	start_pptpd();
 #endif
+#ifdef TCONFIG_IPSEC_TOOLS
+	start_l2tpd();
+#endif
 	restart_nas_services(1, 1);	// !!TB - Samba, FTP and Media Server
 
 #ifdef TCONFIG_SNMP
@@ -2329,6 +2332,9 @@ void stop_services(void)
 	restart_nas_services(1, 0);	// stop Samba, FTP and Media Server
 #ifdef TCONFIG_PPTPD
 	stop_pptpd();
+#endif
+#ifdef TCONFIG_IPSEC_TOOLS
+	stop_l2tpd();
 #endif
 	stop_sched();
 	stop_rstats();
@@ -2954,6 +2960,14 @@ TOP:
 	if (strcmp(service, "pptpd") == 0) {
 		if (action & A_STOP) stop_pptpd();
 		if (action & A_START) start_pptpd();
+		goto CLEAR;
+	}
+#endif
+
+#ifdef TCONFIG_IPSEC_TOOLS
+	if (strcmp(service, "l2tpd") == 0) {
+		if (action & A_STOP) stop_l2tpd();
+		if (action & A_START) start_l2tpd();
 		goto CLEAR;
 	}
 #endif

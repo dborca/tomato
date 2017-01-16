@@ -989,6 +989,19 @@ const defaults_t defaults[] = {
 	{ "pptp_client_dfltroute","0"             },
 #endif
 
+#ifdef TCONFIG_IPSEC_TOOLS
+	{ "l2tpd_enable",         "0"             },
+	{ "l2tpd_saref",          "1"             },
+	{ "l2tpd_remoteip",       "10.7.0.2-7"    },
+	{ "l2tpd_dns1",           ""              },
+	{ "l2tpd_dns2",           ""              },
+	{ "l2tpd_mru",            "1400"          },
+	{ "l2tpd_mtu",            "1400"          },
+	{ "l2tpd_users",          ""              },
+	{ "l2tpd_custom",         ""              },
+	{ "l2tpd_psk",            ""              },
+#endif
+
 #ifdef TCONFIG_TINC
 	{"tinc_wanup",			"0"		},
 	{"tinc_name",			""		},
